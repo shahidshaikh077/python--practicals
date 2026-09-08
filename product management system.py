@@ -7,7 +7,7 @@ while True:
     print("2. Display Products")
     print("3. Update Product Price")
     print("4. Delete Product")
-    print("5. Exit")
+    print("5. search")
 
     choice = int(input("Enter your choice: "))
 
@@ -28,49 +28,36 @@ while True:
         else:
             print("\n--- Product List ---")
             for i in range(len(products)):
-                print(i + 1, products[i], "₹", prices[i])
+                print(products[i], "₹", prices[i])
 
-    # Update product price
-    elif choice == 3:
-        if len(products) == 0:
-            print("No products available.")
+    #update product price
+    elif choice ==3:
+        product = input("Enter product name: ")
+        if product in products:
+            index=products.index(product)
+            updated_price = input("Enter updated price ")
+            prices[index]=updated_price
+            print("uodated sucessfully ")
         else:
-            print("\n--- Product List ---")
-            for i in range(len(products)):
-                print(i + 1, products[i], "₹", prices[i])
-
-            number = int(input("Enter product number to update: "))
-
-            if 1 <= number <= len(products):
-                new_price = float(input("Enter new price: "))
-                prices[number - 1] = new_price
-                print("Product price updated successfully!")
+            print("product is not available ")
+    #delete product
+    elif choice ==4:
+            product = input("Enter product name: ")
+            if product in products:
+                index=products.index(product)
+                products.pop(index)
+                prices.pop(index)
+                print("deleted sucessfully ")
             else:
-                print("Invalid product number.")
-
-    # Delete product
-    elif choice == 4:
-        if len(products) == 0:
-            print("No products available.")
+                print("product is not available ")
+    #search
+    elif choice ==5:
+        product = input("Enter product name: ")
+        if product in products:
+            print("product is available")
+            index=products.index(product)
+            print(products[index],prices[index])
         else:
-            print("\n--- Product List ---")
-            for i in range(len(products)):
-                print(i + 1, products[i], "₹", prices[i])
+            print("product is not available ")
 
-            number = int(input("Enter product number to delete: "))
-
-            if 1 <= number <= len(products):
-                deleted_product = products.pop(number - 1)
-                prices.pop(number - 1)
-
-                print(deleted_product, "deleted successfully!")
-            else:
-                print("Invalid product number.")
-
-    # Exit
-    elif choice == 5:
-        print("Thank you!")
-        break
-
-    else:
-        print("Invalid choice. Please try again.")
+    
